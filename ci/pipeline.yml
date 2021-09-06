@@ -8,16 +8,15 @@ resources:
   type: git
   icon: playlist-check
   source:
-    uri: https://github.com/concourse/resource-types.git
+    uri: https://github.com/ASa3ed/resource-types.git
     branch: master
 
 - name: dutyfree
   type: git
   icon: code-tags
   source:
-    uri: git@github.com:concourse/resource-types-website.git
+    uri: https://github.com/ASa3ed/resource-types-website.git
     branch: master
-    private_key: ((concourse_bot_access_token))
     submodules: all
 
 - name: oci-build-task
@@ -105,7 +104,7 @@ jobs:
       image: unit-image
       file: dutyfree/ci/tasks/go-test.yml
       params:
-        TOKEN: ((github_token))
+        TOKEN: ($GH_TOKEN)
 
 - name: build-docker
   plan:

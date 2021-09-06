@@ -1,0 +1,7 @@
+fly set-pipeline \
+  -t tutorial \
+  -p concourse_website \
+  -c ./ci/pipeline.yml \
+  -y trigger=true \
+  --load-vars-from ~/Documents/concourse_trial/vars.yml
+ 

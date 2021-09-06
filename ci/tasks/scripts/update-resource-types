@@ -3,7 +3,7 @@
 set -e
 
 pushd dutyfree
-  git config --global user.email "concourseteam+concourse-github-bot@gmail.com"
-  git config --global user.name "Concourse Bot"
+  git config --global user.email ($github_username)
+  git config --global user.name ($github_password)
   make update-resources
 popd
