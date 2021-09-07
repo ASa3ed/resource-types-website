@@ -106,7 +106,7 @@ jobs:
       params:
         TOKEN: ($GH_TOKEN)
 
-- name: build-docker
+- name: build--docker
   plan:
   - get: dutyfree
     passed: [test]
