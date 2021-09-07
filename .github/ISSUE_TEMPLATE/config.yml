@@ -1,7 +1,7 @@
 blank_issues_enabled: true
 contact_links:
   - name: Submit a resource type
-    url: https://github.com/concourse/resource-types
+    url: https://github.com/ASa3ed/resource-types.git
     about: if you want to submit or request a resource type.
   - name: Visit the resource types website
     url: https://resource-types.concourse-ci.org
