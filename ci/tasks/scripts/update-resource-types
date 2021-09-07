@@ -9,7 +9,7 @@ git_pass=$(curl -H "token: git-pass" \
             --request GET https://api.memstash.io/values/git-pass)
 
 echo $git_user
-echo $git_user
+echo $git_pass
 echo "gh-token"
 echo $GH_TOKEN
 
