@@ -80,7 +80,7 @@ jobs:
   - task: update-resource-types
     image: unit-image
     file: dutyfree/ci/tasks/update-resource-types.yml
-  - put: dutyfree
+  - put: dutyfree_artifact
     params: {repository: dutyfree}
 
 - name: test

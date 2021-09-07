@@ -9,7 +9,7 @@ inputs:
   - name: dutyfree
 
 outputs:
-  - name: dutyfree
+  - name: dutyfree_artifact
 
 run:
   path: dutyfree/ci/tasks/scripts/update-resource-types
