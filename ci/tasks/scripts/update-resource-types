@@ -2,17 +2,6 @@
 
 set -e
 
-git_user=$(curl -H "token: git-user" \
-            --request GET https://api.memstash.io/values/git-user)
-            
-git_pass=$(curl -H "token: git-pass" \
-            --request GET https://api.memstash.io/values/git-pass)
-
-echo $git_user
-echo $git_pass
-echo "gh-token"
-echo $GH_TOKEN
-
 pushd dutyfree
   git config --global user.email "engasa3ed@gmail.com"
   git config --global user.name "ASaeed"
