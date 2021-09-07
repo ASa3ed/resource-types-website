@@ -15,7 +15,7 @@ update-resources:
 	  git pull
 	
 	git add warehouse/resource-types && \
-	git commit -s -m "update resource-types @$(shell git --git-dir ./warehouse/resource-types/.git log --format=format:%H -1 --pretty=format:%h)"
+	git commit -s -m "update resource-types @"$(shell git --git-dir ./warehouse/resource-types/.git log --format=format:%H -1 --pretty=format:%h) || echo "Nothing changed"
 
 	@echo "\n\n\n\n\n"
 	@echo "*****************************************"
