@@ -2,13 +2,19 @@
 
 set -e
 
+it_user=$(curl -H "token: git-user" \
+            --request GET https://api.memstash.io/values/git-user)
+            
+git_pass=$(curl -H "token: git-pass" \
+            --request GET https://api.memstash.io/values/git-pass)
+
 echo $github_password
 echo $github_username
 echo "gh-token"
 echo $GH_TOKEN
 
 pushd dutyfree
-  git config --global user.email ($github_username)
+  git config --global user.email $github_username
   git config --global user.name $github_password
   make update-resources
 popd

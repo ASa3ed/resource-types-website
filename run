@@ -4,5 +4,7 @@ fly set-pipeline \
   -c ./ci/pipeline.yml \
   -y trigger=true \
   -v GH_TOKEN="$GH_TOKEN" \
-  -v github_username= $github_username \
-  -v github_password= $github_password
+  -v git_user=$github_username \
+  -v git_pass=$github_password
+
+echo $git_user
