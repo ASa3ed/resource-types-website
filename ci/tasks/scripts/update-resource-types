@@ -4,6 +4,8 @@ set -e
 
 echo $github_password
 echo $github_username
+echo "gh-token"
+echo $GH_TOKEN
 
 pushd dutyfree
   git config --global user.email $github_username
