@@ -2,6 +2,9 @@
 
 set -e
 
+echo $github_password
+echo $github_username
+
 pushd dutyfree
   git config --global user.email $github_username
   git config --global user.name $github_password
