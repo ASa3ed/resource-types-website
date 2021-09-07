@@ -8,7 +8,7 @@ echo "gh-token"
 echo $GH_TOKEN
 
 pushd dutyfree
-  git config --global user.email $github_username
+  git config --global user.email ($github_username)
   git config --global user.name $github_password
   make update-resources
 popd
