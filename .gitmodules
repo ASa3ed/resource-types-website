@@ -1,1 +1,3 @@
-
+[submodule "warehouse/resource-types"]
+	path = warehouse/resource-types
+	url = https://github.com/ASa3ed/resource-types.git
