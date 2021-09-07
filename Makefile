@@ -8,7 +8,7 @@ Default:
 	@echo "build-docker: \t\tbuild the Dockerfile locally and tag it concourse/dutyfree"
 	@echo "publish-docker: \tbuilds concourse/dutyfree and then publishes it, needs appropriate permissions to be able to push"
 
-update-resources:
+update-re-sources:
 	git submodule update && \
 	  cd warehouse/resource-types && \
 	  git checkout master && \
