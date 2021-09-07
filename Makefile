@@ -13,7 +13,7 @@ update-resources:
 	  cd warehouse/resource-types && \
 	  git checkout master && \
 	  git pull
-	ls -la ./warehouse/resource-types/
+	
 	git add warehouse/resource-types && \
 	git commit -s -m "update resource-types @"$(shell git --git-dir ./warehouse/resource-types/.git log --format=format:%H -1 --pretty=format:%h)
 
