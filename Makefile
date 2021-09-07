@@ -12,7 +12,8 @@ update-resources:
 	git submodule update && \
 	  cd warehouse/resource-types && \
 	  git checkout master && \
-	  git pull
+	  git pull && \
+	  cd ../..
 	
 	git add warehouse/resource-types && \
 	git commit -s -m "update resource-types @"$(shell git --git-dir ./warehouse/resource-types/.git log --format=format:%H -1 --pretty=format:%h)
