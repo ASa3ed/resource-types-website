@@ -99,7 +99,11 @@ jobs:
     - task: elm-tests
       image: unit-image
       file: dutyfree/ci/tasks/elm-test.yml
-    
+    - task: go-tests
+      image: unit-image
+      file: dutyfree/ci/tasks/go-test.yml
+      params:
+        TOKEN: ($GH_TOKEN)
 
 - name: build-docker
   plan:
