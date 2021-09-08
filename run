@@ -1,10 +1,5 @@
-fly set-pipeline \
-  -t tutorial \
+fly -t tutorial set-pipeline \
   -p concourse_website \
   -c ./ci/pipeline.yml \
   -y trigger=true \
-  -v GH_TOKEN="$GH_TOKEN" \
-  -v git_user=$github_username \
-  -v git_pass=$github_password
-
-echo $git_user
+  --load-vars-from ~/Documents/concourse_trial/credentials.yml
