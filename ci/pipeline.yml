@@ -83,28 +83,7 @@ jobs:
   - put: dutyfree
     params: {repository: dutyfree}
 
-- name: test
-  plan:
-  - get: dutyfree
-    trigger: true
-  - get: unit-image
-  - in_parallel:
-    - task: elm-analyse
-      image: unit-image
-      file: dutyfree/ci/tasks/elm-analyse.yml
-    - try:
-        task: go-lint
-        image: unit-image
-        file: dutyfree/ci/tasks/go-lint.yml
-  - in_parallel:
-    - task: elm-tests
-      image: unit-image
-      file: dutyfree/ci/tasks/elm-test.yml
-    - task: go-tests
-      image: unit-image
-      file: dutyfree/ci/tasks/go-test.yml
-      params:
-        TOKEN: ($GH_TOKEN)
+
 
 - name: build-docker
   plan:
