@@ -3,3 +3,5 @@ fly -t tutorial set-pipeline \
   -c ./ci/pipeline.yml \
   -y trigger=true \
   --load-vars-from ~/Documents/concourse_trial/credentials.yml
+
+echo $docker_username
