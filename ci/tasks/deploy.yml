@@ -9,4 +9,4 @@ inputs:
   - name: dutyfree
 
 run:
-  path: dutyfree/ci/tasks/scripts/deploy_aws1
+  path: dutyfree/ci/tasks/scripts/deploy_aws
