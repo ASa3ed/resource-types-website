@@ -7,6 +7,7 @@ image_resource:
 
 inputs:
   - name: dutyfree
+  - name: aws-setup
 
 run:
   path: dutyfree/ci/tasks/scripts/deploy_aws
