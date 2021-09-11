@@ -22,4 +22,3 @@
     
   roles:
     - configure-server
-    - deploy

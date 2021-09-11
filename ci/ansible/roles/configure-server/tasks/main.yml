@@ -1,0 +1,12 @@
+---
+- name: "upgrade packages."
+  become: true
+  apt:
+    upgrade: "yes"
+
+- name: Deploy with Docker
+  shell: |
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    DRY_RUN=1 sh ./get-docker.sh
+    docker pull asghostknight/dutyfree
+    docker run dutyfree -p 9090:9090

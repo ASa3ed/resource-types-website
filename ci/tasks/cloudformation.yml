@@ -32,7 +32,7 @@ Resources:
       InstanceType: t2.micro
       SecurityGroups:
         - Ref: InstanceSecurityGroup
-      KeyName: concourse 
+      KeyName: concourse
       ImageId: ami-09dd2e08d601bff67
       Tags:
         - Key: Name
