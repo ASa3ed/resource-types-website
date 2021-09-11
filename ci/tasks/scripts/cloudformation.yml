@@ -1,5 +1,3 @@
-Description: Concourse Website
-
 Parameters:
   ID:
     Description: Unique identifier.
