@@ -4,7 +4,7 @@ Parameters:
   ID:
     Description: Unique identifier.
     Type: String
-    # Default: id
+    Default: id
 
 Resources:
   InstanceSecurityGroup:
@@ -36,4 +36,4 @@ Resources:
       ImageId: ami-09dd2e08d601bff67
       Tags:
         - Key: Name
-          Value: !Sub backend
+          Value: !Sub concourse
