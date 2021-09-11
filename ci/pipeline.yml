@@ -3,7 +3,19 @@ resource_types:
   type: registry-image
   source: {repository: mockersf/concourse-slack-notifier}
 
+- name: cloudformation
+  type: docker-image
+  source:
+    repository: pcfseceng/cloudformation-resource
+
 resources:
+- name: aws-setup
+  type: cloudformation
+  source:
+    aws_access_key: ((aws_access_key))
+    aws_secret_key: ((aws_secret_key))
+    aws_region: us-west-2
+
 - name: resource-types
   type: git
   icon: playlist-check
@@ -30,8 +42,8 @@ resources:
   source:
     repository: asghostknight/dutyfree
     tag: latest
-    username: ($docker_username)
-    password: ($docker_password)
+    username: "docker_username"
+    password: "docker_password"
 
 - name: unit-image
   icon: docker
@@ -83,33 +95,33 @@ jobs:
   - put: dutyfree
     params: {repository: dutyfree}
 
-# - name: test
-#   plan:
-#   - get: dutyfree
-#     trigger: true
-#   - get: unit-image
-#   - in_parallel:
-#     - task: elm-analyse
-#       image: unit-image
-#       file: dutyfree/ci/tasks/elm-analyse.yml
-#     - try:
-#         task: go-lint
-#         image: unit-image
-#         file: dutyfree/ci/tasks/go-lint.yml
-#   - in_parallel:
-#     - task: elm-tests
-#       image: unit-image
-#       file: dutyfree/ci/tasks/elm-test.yml
-#     - task: go-tests
-#       image: unit-image
-#       file: dutyfree/ci/tasks/go-test.yml
-#       params:
-#         TOKEN: ($GH_TOKEN)
+- name: test
+  plan:
+  - get: dutyfree
+    trigger: true
+  - get: unit-image
+  - in_parallel:
+    - task: elm-analyse
+      image: unit-image
+      file: dutyfree/ci/tasks/elm-analyse.yml
+    - try:
+        task: go-lint
+        image: unit-image
+        file: dutyfree/ci/tasks/go-lint.yml
+  - in_parallel:
+    - task: elm-tests
+      image: unit-image
+      file: dutyfree/ci/tasks/elm-test.yml
+    - task: go-tests
+      image: unit-image
+      file: dutyfree/ci/tasks/go-test.yml
+      params:
+        TOKEN: ($GH_TOKEN)
 
 - name: build-docker
   plan:
   - get: dutyfree
-    # passed: [test]
+    passed: [test]
     trigger: true
   - get: oci-build-task
   - in_parallel:
@@ -144,3 +156,52 @@ jobs:
     params:
       mode: normal
       alert_type: failed
+  
+- name: deploy
+  plan:
+  - get: dutyfree
+  - get: dutyfree-image
+  - get: unit-image
+    passed: [sanity-check]
+    trigger: true
+  - put: aws-setup
+    params:
+      cloudformation_file: dutyfree/ci/tasks/cloudformation.yml
+      stack_name: concourse      
+  - task: ansible
+    image: unit-image
+    config:
+      platform: linux
+      inputs: 
+      - name: dutyfree
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          whoami
+          env
+          uname -a
+          ls -la 
+
+          curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+          python get-pip.py
+          python -m pip install ansible --quiet
+          ansible --version | grep "python version"
+
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip -qq awscliv2.zip
+          ./aws/install
+
+          ls -la
+
+          ip=$(aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters "Name=tag:project,Values=concourse" \
+              --output text)
+          
+          echo "$ip" >> dutyfree/ci/ansible/inventory.txt
+
+          ls -la
+
+          ansible-playbook -i dutyfree/ci/ansible/inventory.txt dutyfree/ci/ansible/configure_server.yml
