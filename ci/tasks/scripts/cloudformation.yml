@@ -1,9 +1,3 @@
-Parameters:
-  ID:
-    Description: Unique identifier.
-    Type: String
-    # Default: id
-
 Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
