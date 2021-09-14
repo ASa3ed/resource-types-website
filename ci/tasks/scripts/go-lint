@@ -7,5 +7,5 @@ pushd dutyfree/warehouse
 
   go mod download
 
-  golangci-lint run
+  golangci-lint run -v
 popd
