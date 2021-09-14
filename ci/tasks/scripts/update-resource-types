@@ -3,7 +3,7 @@
 set -e
 
 pushd dutyfree
-  git config --global user.email "engasa3ed@gmail.com"
-  git config --global user.name "ASaeed"
+  git config --global user.email ((git_user))
+  git config --global user.name ((git_name))
   make --debug=v update-resources
 popd
