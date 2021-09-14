@@ -38,7 +38,7 @@ func main() {
 		port = 9090
 	}
 
-	token := os.Getenv("GH_TOKEN")
+	token := os.Getenv("((GH_TOKEN))")
 	if token == "" {
 		panic("GH_TOKEN environment variable is not set")
 	}
